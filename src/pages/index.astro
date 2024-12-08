@@ -1,0 +1,79 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import CourseCard from '../components/CourseCard.astro';
+import TrackCard from '../components/TrackCard.astro';
+---
+
+<MainLayout title="المنصة التعليمية - الصفحة الرئيسية">
+  <!-- Hero Section -->
+  <section class="text-center py-20 bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-2xl mb-12">
+    <h1 class="text-4xl md:text-6xl font-bold mb-6">تعلم البرمجة باللغة العربية</h1>
+    <p class="text-xl mb-8">ابدأ رحلتك في عالم البرمجة مع أفضل المدربين العرب</p>
+    <a href="/courses" class="bg-white text-blue-600 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-gray-100">
+      ابدأ التعلم مجاناً
+    </a>
+  </section>
+
+  <!-- Featured Courses -->
+  <section class="mb-16">
+    <div class="flex justify-between items-center mb-8">
+      <h2 class="text-3xl font-bold">أحدث الدورات</h2>
+      <a href="/courses" class="text-blue-600 hover:text-blue-700">عرض جميع الدورات</a>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <CourseCard
+        title="مقدمة في HTML و CSS"
+        description="تعلم أساسيات تطوير الويب"
+        image="/images/html-css.jpg"
+        level="مبتدئ"
+        duration="8 ساعات"
+        price="مجاناً"
+        href="/courses/html-css"
+      />
+      <CourseCard
+        title="JavaScript الأساسي"
+        description="تعلم أساسيات البرمجة بلغة جافاسكريبت"
+        image="/images/javascript.jpg"
+        level="مبتدئ"
+        duration="12 ساعة"
+        price="مجاناً"
+        href="/courses/javascript"
+      />
+      <CourseCard
+        title="React.js للمبتدئين"
+        description="بناء تطبيقات الويب التفاعلية"
+        image="/images/react.jpg"
+        level="متوسط"
+        duration="15 ساعة"
+        price="مجاناً"
+        href="/courses/react"
+      />
+    </div>
+  </section>
+
+  <!-- Learning Tracks -->
+  <section class="mb-16">
+    <div class="flex justify-between items-center mb-8">
+      <h2 class="text-3xl font-bold">المسارات التعليمية</h2>
+      <a href="/tracks" class="text-blue-600 hover:text-blue-700">عرض جميع المسارات</a>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <TrackCard
+        title="مطور واجهات أمامية"
+        description="تعلم تطوير واجهات المستخدم الحديثة"
+        courses={12}
+        duration="60 ساعة"
+        href="/tracks/frontend"
+      />
+      <TrackCard
+        title="مطور خلفيات"
+        description="تعلم تطوير خلفيات التطبيقات وقواعد البيانات"
+        courses={10}
+        duration="50 ساعة"
+        href="/tracks/backend"
+      />
+    </div>
+  </section>
+</MainLayout>

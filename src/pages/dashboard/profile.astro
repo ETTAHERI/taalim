@@ -1,0 +1,27 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import ProfileForm from '../../components/profile/ProfileForm';
+import { supabase } from '../../lib/supabase';
+
+// التحقق من المصادقة
+const { data: { session } } = await supabase.auth.getSession();
+if (!session) {
+  return Astro.redirect('/login');
+}
+
+// جلب بيانات الملف الشخصي
+const { data: profile } = await supabase
+  .from('profiles')
+  .select('*')
+  .eq('id', session.user.id)
+  .single();
+---
+
+<MainLayout title="الملف الشخصي">
+  <div class="max-w-3xl mx-auto">
+    <div class="bg-white rounded-lg shadow-md p-6">
+      <h1 class="text-2xl font-bold mb-6">الملف الشخصي</h1>
+      <ProfileForm client:load profile={profile} />
+    </div>
+  </div>
+</MainLayout>

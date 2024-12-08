@@ -1,0 +1,15 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import RegisterForm from '../components/auth/RegisterForm';
+---
+
+<MainLayout title="إنشاء حساب جديد">
+  <div class="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+    <h1 class="text-2xl font-bold mb-6 text-center">إنشاء حساب جديد</h1>
+    <RegisterForm client:load />
+    <p class="mt-4 text-center text-sm text-gray-600">
+      لديك حساب بالفعل؟
+      <a href="/login" class="text-blue-600 hover:text-blue-700">تسجيل الدخول</a>
+    </p>
+  </div>
+</MainLayout>

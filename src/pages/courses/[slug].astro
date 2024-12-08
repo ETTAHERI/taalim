@@ -1,0 +1,130 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import CheckoutButton from '../../components/payment/CheckoutButton';
+
+const { slug } = Astro.params;
+
+// في الواقع، سنقوم بجلب هذه البيانات من Supabase
+const course = {
+  id: '1',
+  title: 'مقدمة في HTML و CSS',
+  description: 'تعلم أساسيات تطوير الويب من الصفر وحتى الاحتراف',
+  image: '/images/html-css.jpg',
+  level: 'مبتدئ',
+  duration: '8 ساعات',
+  price: 49.99,
+  instructor: {
+    name: 'أحمد محمد',
+    avatar: '/images/instructor.jpg',
+    bio: 'مطور ويب محترف مع خبرة 10 سنوات في تطوير المواقع'
+  },
+  curriculum: [
+    {
+      title: 'مقدمة في HTML',
+      lessons: [
+        { title: 'ما هو HTML؟', duration: '10 دقائق' },
+        { title: 'هيكل الصفحة', duration: '15 دقيقة' },
+        { title: 'العناصر الأساسية', duration: '20 دقيقة' }
+      ]
+    },
+    {
+      title: 'أساسيات CSS',
+      lessons: [
+        { title: 'مقدمة في CSS', duration: '12 دقيقة' },
+        { title: 'تنسيق النصوص', duration: '18 دقيقة' },
+        { title: 'نموذج الصندوق', duration: '25 دقيقة' }
+      ]
+    }
+  ]
+};
+---
+
+<MainLayout title={course.title}>
+  <div class="max-w-7xl mx-auto">
+    <!-- Course Header -->
+    <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
+      <div class="relative h-96">
+        <img 
+          src={course.image} 
+          alt={course.title}
+          class="w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <div class="text-center text-white">
+            <h1 class="text-4xl font-bold mb-4">{course.title}</h1>
+            <p class="text-xl">{course.description}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Course Content -->
+      <div class="lg:col-span-2">
+        <!-- Course Description -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+          <h2 class="text-2xl font-bold mb-4">وصف الدورة</h2>
+          <p class="text-gray-600">{course.description}</p>
+        </div>
+
+        <!-- Course Curriculum -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <h2 class="text-2xl font-bold mb-4">محتوى الدورة</h2>
+          <div class="space-y-4">
+            {course.curriculum.map((section) => (
+              <div class="border rounded-lg">
+                <div class="p-4 bg-gray-50 font-semibold">
+                  {section.title}
+                </div>
+                <div class="p-4 space-y-2">
+                  {section.lessons.map((lesson) => (
+                    <div class="flex justify-between items-center">
+                      <span>{lesson.title}</span>
+                      <span class="text-gray-500">{lesson.duration}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Course Sidebar -->
+      <div class="lg:col-span-1">
+        <div class="bg-white rounded-lg shadow-md p-6 sticky top-4">
+          <div class="mb-6">
+            <div class="text-3xl font-bold mb-2">${course.price}</div>
+            <div class="flex items-center space-x-4 space-x-reverse mb-4">
+              <div class="flex items-center">
+                <span class="text-gray-500">المستوى:</span>
+                <span class="font-semibold mr-2">{course.level}</span>
+              </div>
+              <div class="flex items-center">
+                <span class="text-gray-500">المدة:</span>
+                <span class="font-semibold mr-2">{course.duration}</span>
+              </div>
+            </div>
+          </div>
+
+          <CheckoutButton 
+            client:load
+            courseId={course.id}
+            price={course.price}
+            title={course.title}
+          />
+
+          <div class="mt-6">
+            <h3 class="font-semibold mb-2">تتضمن الدورة:</h3>
+            <ul class="space-y-2 text-gray-600">
+              <li>• إمكانية الوصول مدى الحياة</li>
+              <li>• شهادة إتمام</li>
+              <li>• تمارين عملية</li>
+              <li>• دعم فني</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</MainLayout>

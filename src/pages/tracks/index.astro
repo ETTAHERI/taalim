@@ -1,0 +1,53 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import TrackCard from '../../components/TrackCard.astro';
+
+// في الواقع، سنقوم بجلب هذه البيانات من Supabase
+const tracks = [
+  {
+    title: 'مطور واجهات أمامية',
+    description: 'تعلم تطوير واجهات المستخدم الحديثة',
+    courses: 12,
+    duration: '60 ساعة',
+    href: '/tracks/frontend'
+  },
+  {
+    title: 'مطور خلفيات',
+    description: 'تعلم تطوير خلفيات التطبيقات وقواعد البيانات',
+    courses: 10,
+    duration: '50 ساعة',
+    href: '/tracks/backend'
+  },
+  {
+    title: 'مطور تطبيقات موبايل',
+    description: 'تعلم تطوير تطبيقات الهواتف الذكية',
+    courses: 8,
+    duration: '40 ساعة',
+    href: '/tracks/mobile'
+  },
+  {
+    title: 'علوم البيانات',
+    description: 'تعلم تحليل البيانات والذكاء الاصطناعي',
+    courses: 15,
+    duration: '75 ساعة',
+    href: '/tracks/data-science'
+  }
+];
+---
+
+<MainLayout title="المسارات التعليمية">
+  <div class="max-w-7xl mx-auto">
+    <div class="mb-12 text-center">
+      <h1 class="text-4xl font-bold mb-4">المسارات التعليمية</h1>
+      <p class="text-gray-600 max-w-2xl mx-auto">
+        اختر المسار المناسب لك وابدأ رحلة التعلم مع خطة دراسية منظمة ومتكاملة
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {tracks.map((track) => (
+        <TrackCard {...track} />
+      ))}
+    </div>
+  </div>
+</MainLayout>

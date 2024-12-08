@@ -1,0 +1,33 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  image: string;
+  level: string;
+  duration: string;
+  price: string;
+  href: string;
+}
+
+const { title, description, image, level, duration, price, href } = Astro.props;
+---
+
+<article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+  <img src={image} alt={title} class="w-full h-48 object-cover" />
+  <div class="p-6">
+    <h3 class="text-xl font-bold mb-2">{title}</h3>
+    <p class="text-gray-600 mb-4">{description}</p>
+    
+    <div class="flex items-center justify-between mb-4">
+      <span class="text-sm text-gray-500">{level}</span>
+      <span class="text-sm text-gray-500">{duration}</span>
+    </div>
+    
+    <div class="flex items-center justify-between">
+      <span class="font-bold text-blue-600">{price}</span>
+      <a href={href} class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+        ابدأ التعلم
+      </a>
+    </div>
+  </div>
+</article>

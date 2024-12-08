@@ -1,0 +1,108 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import CourseCard from '../../components/CourseCard.astro';
+
+const { slug } = Astro.params;
+
+// في الواقع، سنقوم بجلب هذه البيانات من Supabase
+const track = {
+  title: 'مطور واجهات أمامية',
+  description: 'تعلم تطوير واجهات المستخدم الحديثة من الصفر وحتى الاحتراف',
+  duration: '60 ساعة',
+  courses: [
+    {
+      id: '1',
+      title: 'HTML و CSS',
+      description: 'تعلم أساسيات تطوير الويب',
+      image: '/images/html-css.jpg',
+      level: 'مبتدئ',
+      duration: '8 ساعات',
+      price: 'مجاناً',
+      href: '/courses/html-css'
+    },
+    {
+      id: '2',
+      title: 'JavaScript',
+      description: 'تعلم أساسيات البرمجة بلغة جافاسكريبت',
+      image: '/images/javascript.jpg',
+      level: 'مبتدئ',
+      duration: '12 ساعة',
+      price: '$49.99',
+      href: '/courses/javascript'
+    },
+    {
+      id: '3',
+      title: 'React.js',
+      description: 'بناء تطبيقات الويب التفاعلية',
+      image: '/images/react.jpg',
+      level: 'متوسط',
+      duration: '15 ساعة',
+      price: '$69.99',
+      href: '/courses/react'
+    }
+  ],
+  skills: [
+    'HTML5 و CSS3',
+    'JavaScript ES6+',
+    'React.js',
+    'تصميم المواقع المتجاوبة',
+    'إدارة حالة التطبيق',
+    'أداء وتحسين المواقع'
+  ]
+};
+---
+
+<MainLayout title={track.title}>
+  <div class="max-w-7xl mx-auto">
+    <!-- Track Header -->
+    <div class="bg-white rounded-lg shadow-md p-8 mb-8">
+      <h1 class="text-4xl font-bold mb-4">{track.title}</h1>
+      <p class="text-xl text-gray-600 mb-6">{track.description}</p>
+      
+      <div class="flex items-center space-x-4 space-x-reverse">
+        <div class="flex items-center">
+          <span class="text-gray-500">المدة الإجمالية:</span>
+          <span class="font-semibold mr-2">{track.duration}</span>
+        </div>
+        <div class="flex items-center">
+          <span class="text-gray-500">عدد الدورات:</span>
+          <span class="font-semibold mr-2">{track.courses.length}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Track Content -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Courses List -->
+      <div class="lg:col-span-2">
+        <h2 class="text-2xl font-bold mb-6">الدورات المتضمنة</h2>
+        <div class="space-y-6">
+          {track.courses.map((course) => (
+            <CourseCard {...course} />
+          ))}
+        </div>
+      </div>
+
+      <!-- Skills Sidebar -->
+      <div class="lg:col-span-1">
+        <div class="bg-white rounded-lg shadow-md p-6 sticky top-4">
+          <h2 class="text-xl font-bold mb-4">المهارات المكتسبة</h2>
+          <ul class="space-y-2">
+            {track.skills.map((skill) => (
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-green-500 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                {skill}
+              </li>
+            ))}
+          </ul>
+
+          <button class="w-full bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 mt-6">
+            ابدأ المسار الآن
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</MainLayout>

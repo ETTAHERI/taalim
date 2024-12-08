@@ -1,0 +1,84 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import CourseCard from '../../components/CourseCard.astro';
+import { supabase } from '../../lib/supabase';
+
+// في الواقع، سنقوم بجلب هذه البيانات من Supabase
+const courses = [
+  {
+    id: '1',
+    title: 'مقدمة في HTML و CSS',
+    description: 'تعلم أساسيات تطوير الويب',
+    image: '/images/html-css.jpg',
+    level: 'مبتدئ',
+    duration: '8 ساعات',
+    price: 'مجاناً',
+    href: '/courses/html-css'
+  },
+  {
+    id: '2',
+    title: 'JavaScript الأساسي',
+    description: 'تعلم أساسيات البرمجة بلغة جافاسكريبت',
+    image: '/images/javascript.jpg',
+    level: 'مبتدئ',
+    duration: '12 ساعة',
+    price: '$49.99',
+    href: '/courses/javascript'
+  },
+  {
+    id: '3',
+    title: 'React.js للمبتدئين',
+    description: 'بناء تطبيقات الويب التفاعلية',
+    image: '/images/react.jpg',
+    level: 'متوسط',
+    duration: '15 ساعة',
+    price: '$69.99',
+    href: '/courses/react'
+  }
+];
+---
+
+<MainLayout title="الدورات التعليمية">
+  <div class="max-w-7xl mx-auto">
+    <div class="mb-8">
+      <h1 class="text-4xl font-bold mb-4">الدورات التعليمية</h1>
+      <p class="text-gray-600">اختر من بين مجموعة متنوعة من الدورات عالية الجودة</p>
+    </div>
+
+    <!-- Filters -->
+    <div class="bg-white p-4 rounded-lg shadow mb-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <select class="rounded-md border-gray-300">
+          <option value="">المستوى</option>
+          <option value="beginner">مبتدئ</option>
+          <option value="intermediate">متوسط</option>
+          <option value="advanced">متقدم</option>
+        </select>
+
+        <select class="rounded-md border-gray-300">
+          <option value="">السعر</option>
+          <option value="free">مجاني</option>
+          <option value="paid">مدفوع</option>
+        </select>
+
+        <select class="rounded-md border-gray-300">
+          <option value="">المدة</option>
+          <option value="short">أقل من 5 ساعات</option>
+          <option value="medium">5-10 ساعات</option>
+          <option value="long">أكثر من 10 ساعات</option>
+        </select>
+
+        <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+          تطبيق الفلتر
+        </button>
+      </div>
+    </div>
+
+    <!-- Courses Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {courses.map((course) => (
+        <CourseCard {...course} />
+      ))}
+    </div>
+  </div>
+</MainLayout>
